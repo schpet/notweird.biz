@@ -1,7 +1,6 @@
 class Drawing
 
   constructor: (data, imageSrc)->
-    console.log 'sup'
     @daisyContainer = document.getElementById 'daisy-container'
     @context = @daisyContainer.getContext '2d'
 
@@ -23,13 +22,13 @@ class Drawing
 
   drawFrame: =>
     if @framePosition of @points
-      @drawnFrames++
+      if ++@drawnFrames >= @pointCount
+        clearInterval @interval
+
       @context.drawImage @daisy, @points[@framePosition].x,
           @points[@framePosition].y
 
     @framePosition++
-    if @drawnFrames >= @pointCount
-      clearInterval @interval
 
 
 

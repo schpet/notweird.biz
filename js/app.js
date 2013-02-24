@@ -9,7 +9,6 @@
       this.drawFrame = __bind(this.drawFrame, this);
 
       this.startAnimation = __bind(this.startAnimation, this);
-      console.log('sup');
       this.daisyContainer = document.getElementById('daisy-container');
       this.context = this.daisyContainer.getContext('2d');
       this.daisy = new Image;
@@ -35,13 +34,12 @@
 
     Drawing.prototype.drawFrame = function() {
       if (this.framePosition in this.points) {
-        this.drawnFrames++;
+        if (++this.drawnFrames >= this.pointCount) {
+          clearInterval(this.interval);
+        }
         this.context.drawImage(this.daisy, this.points[this.framePosition].x, this.points[this.framePosition].y);
       }
-      this.framePosition++;
-      if (this.drawnFrames >= this.pointCount) {
-        return clearInterval(this.interval);
-      }
+      return this.framePosition++;
     };
 
     return Drawing;
